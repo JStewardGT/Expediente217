@@ -2,6 +2,10 @@
 
 > Escape room web educativo sobre **páncreas exocrino, digestión y malabsorción**.
 
+### ▶️ [Jugar ahora](https://jstewardgt.github.io/Expediente217/)
+
+🔗 **https://jstewardgt.github.io/Expediente217/** — se abre en el navegador del celular, sin instalar nada.
+
 Los jugadores forman un equipo médico de emergencia que despierta dentro del **Hospital
 San Gabriel**, una institución clausurada años atrás tras una serie de casos inexplicables.
 Un último paciente sigue conectado al soporte vital. Recorriendo las salas del hospital y
