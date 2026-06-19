@@ -14,7 +14,7 @@ un equipo médico que recorre un hospital abandonado resolviendo 14 retos para d
 ## Stack y decisiones
 
 - **Frontend:** React + Vite
-- **Deploy:** GitHub Pages (sirve en subpath → configurar `base` en `vite.config`)
+- **Deploy:** GitHub Pages, repo `JStewardGT/Expediente217` (sirve en subpath `/Expediente217/` → ya configurado en `vite.config.js`)
 - **Sin backend:** sitio estático, sin usuarios, sin puntajes persistentes
 - **Móvil primero:** diseño vertical (portrait), pensado para celular
 - **Drag en móvil:** patrón **tap origen → tap destino** (NO drag nativo — da bugs en touch)
