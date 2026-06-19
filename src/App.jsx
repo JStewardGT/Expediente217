@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { SALAS, CONFIG, INTRO, FINAL } from './data/salas.js'
+import { iniciarAudio, setSilenciado, sonarLatido } from './audio/sonido.js'
 import Cronometro from './components/Cronometro.jsx'
 import PanelPistas from './components/PanelPistas.jsx'
 import Intro from './components/Intro.jsx'
@@ -13,6 +14,7 @@ export default function App() {
   const [indiceSala, setIndiceSala] = useState(0)
   const [pistasUsadas, setPistasUsadas] = useState(0)
   const [tiempoAgotado, setTiempoAgotado] = useState(false)
+  const [silenciado, setSilenciadoEstado] = useState(false)
 
   const salaActual = SALAS[indiceSala]
   const totalSalas = SALAS.length
@@ -47,13 +49,36 @@ export default function App() {
     setFase('intro')
   }, [])
 
+  const alternarSonido = useCallback(() => {
+    setSilenciadoEstado((s) => {
+      const nuevo = !s
+      setSilenciado(nuevo)
+      return nuevo
+    })
+  }, [])
+
   // Bloquear scroll del body durante el juego (experiencia tipo app móvil)
   useEffect(() => {
     document.body.classList.toggle('jugando', fase === 'jugando')
   }, [fase])
 
+  // Latido del monitor cardíaco mientras se juega.
+  useEffect(() => {
+    if (fase !== 'jugando') return
+    const id = setInterval(() => sonarLatido(), 3000)
+    return () => clearInterval(id)
+  }, [fase])
+
   if (fase === 'intro') {
-    return <Intro intro={INTRO} onComenzar={() => setFase('jugando')} />
+    return (
+      <Intro
+        intro={INTRO}
+        onComenzar={() => {
+          iniciarAudio()
+          setFase('jugando')
+        }}
+      />
+    )
   }
 
   if (fase === 'final') {
@@ -68,6 +93,8 @@ export default function App() {
   return (
     <div className="app-shell">
       <div className="niebla" aria-hidden="true" />
+      <div className="scanlines" aria-hidden="true" />
+      <div className="flicker" aria-hidden="true" />
       <header className="hud">
         <div className="hud-progreso">
           Sala <strong>{indiceSala + 1}</strong> / {totalSalas}
@@ -82,6 +109,14 @@ export default function App() {
           restantes={pistasRestantes}
           onUsarPista={usarPista}
         />
+        <button
+          className="btn-sonido"
+          onClick={alternarSonido}
+          aria-label={silenciado ? 'Activar sonido' : 'Silenciar'}
+          title={silenciado ? 'Activar sonido' : 'Silenciar'}
+        >
+          {silenciado ? '🔇' : '🔊'}
+        </button>
       </header>
 
       <main className="escenario">

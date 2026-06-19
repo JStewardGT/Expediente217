@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Acierto from './comun/Acierto.jsx'
+import { sonarError } from '../audio/sonido.js'
 
 // Candado numérico de N dígitos (sala 4).
 export default function Candado({ sala, onResuelto }) {
@@ -16,7 +17,11 @@ export default function Candado({ sala, onResuelto }) {
     setEstado('jugando')
     setEntrada((e) => e.slice(0, -1))
   }
-  const comprobar = () => setEstado(entrada === codigo ? 'ok' : 'error')
+  const comprobar = () => {
+    const ok = entrada === codigo
+    if (!ok) sonarError()
+    setEstado(ok ? 'ok' : 'error')
+  }
 
   if (estado === 'ok') {
     return (

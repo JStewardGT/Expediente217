@@ -167,8 +167,8 @@ Expediente217/
 - [x] 14 salas cargadas como datos
 - [x] Mecánicas: selección, candado, respuesta abierta, secuencia
 - [x] Mecánicas: emparejar (tap y memoria) e imagen interactiva
-- [ ] Ambientación visual y sonora completa (efectos, audio)
-- [ ] Despliegue en GitHub Pages
+- [x] Ambientación visual (scanlines, flicker, glitch) y sonora (Web Audio API)
+- [x] Despliegue en GitHub Pages
 
 ---
 

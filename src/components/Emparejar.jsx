@@ -1,5 +1,6 @@
 import { useState, useMemo, useRef } from 'react'
 import Acierto from './comun/Acierto.jsx'
+import { sonarError } from '../audio/sonido.js'
 
 function barajar(arr) {
   const a = [...arr]
@@ -40,6 +41,7 @@ function Tap({ sala, onResuelto }) {
       setSelIzq(null)
       setError(null)
     } else {
+      sonarError()
       setError(der)
       setTimeout(() => setError(null), 450)
       setSelIzq(null)

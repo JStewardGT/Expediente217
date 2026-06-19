@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Acierto from './comun/Acierto.jsx'
+import { sonarError } from '../audio/sonido.js'
 
 // Baraja una copia del arreglo (Fisher-Yates).
 function barajar(arr) {
@@ -34,8 +35,11 @@ export default function Secuencia({ sala, onResuelto }) {
     setOrden((o) => o.filter((x) => x !== p))
     setDisponibles((d) => [...d, p])
   }
-  const comprobar = () =>
-    setEstado(orden.join('|') === pasos.join('|') ? 'ok' : 'error')
+  const comprobar = () => {
+    const ok = orden.join('|') === pasos.join('|')
+    if (!ok) sonarError()
+    setEstado(ok ? 'ok' : 'error')
+  }
 
   if (estado === 'ok') {
     return <Acierto recompensa={recompensa} onContinuar={onResuelto} />

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Acierto from './comun/Acierto.jsx'
 import AnatomiaSVG from './AnatomiaSVG.jsx'
+import { sonarError } from '../audio/sonido.js'
 
 // Mecánica de imagen interactiva: localizar estructuras tocando la imagen
 // (salas 5 y 8). Se pide una estructura a la vez; el jugador toca la zona.
@@ -19,6 +20,7 @@ export default function ImagenInteractiva({ sala, onResuelto }) {
       setEncontrados((e) => [...e, obj.nombre])
       setErrorEn(null)
     } else {
+      sonarError()
       setErrorEn(obj.nombre)
       setTimeout(() => setErrorEn(null), 450)
     }

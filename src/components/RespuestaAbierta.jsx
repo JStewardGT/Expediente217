@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Acierto from './comun/Acierto.jsx'
+import { sonarError } from '../audio/sonido.js'
 
 // Normaliza para comparar tolerando mayúsculas, acentos y espacios.
 const normalizar = (s) =>
@@ -19,6 +20,7 @@ export default function RespuestaAbierta({ sala, onResuelto }) {
   const comprobar = () => {
     const v = normalizar(valor)
     const ok = v.length > 0 && respuestasAceptadas.some((r) => normalizar(r) === v)
+    if (!ok) sonarError()
     setEstado(ok ? 'ok' : 'error')
   }
 

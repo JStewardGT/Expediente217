@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import Acierto from './comun/Acierto.jsx'
+import { sonarError } from '../audio/sonido.js'
 
 function barajar(arr) {
   const a = [...arr]
@@ -34,6 +35,7 @@ export default function Seleccion({ sala, onResuelto }) {
     const a = [...seleccion].sort()
     const b = [...correctas].sort()
     const ok = a.length === b.length && a.every((v, i) => v === b[i])
+    if (!ok) sonarError()
     setEstado(ok ? 'ok' : 'error')
   }
 

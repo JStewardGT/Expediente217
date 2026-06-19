@@ -201,14 +201,6 @@ body.jugando { overflow: hidden; }
 }
 .niebla-roja { background: radial-gradient(circle at 50% 50%, rgba(226, 59, 59, 0.18), transparent 65%); }
 
-.monitor-latido {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(transparent 96%, var(--verde-esmeralda-tenue) 100%);
-  opacity: 0.4;
-}
-
 @keyframes parpadeo { 50% { opacity: 0.3; } }
 @keyframes aparecer { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes sacudir {
@@ -449,3 +441,109 @@ body.jugando { overflow: hidden; }
   opacity: 0.7;
 }
 .chip.ok { color: var(--verde-esmeralda); border-color: var(--verde-esmeralda); opacity: 1; }
+
+/* =========================================================================
+   AMBIENTACIÓN (Día 4)
+   ========================================================================= */
+
+/* ---- Botón de sonido --------------------------------------------------- */
+.btn-sonido {
+  background: transparent;
+  border: 1px solid var(--verde-esmeralda-tenue);
+  border-radius: var(--radio);
+  padding: 6px 9px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  line-height: 1;
+}
+.btn-sonido:hover { border-color: var(--verde-esmeralda); }
+
+/* ---- Scanlines (interferencia de pantalla) ---------------------------- */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.22) 3px,
+    rgba(0, 0, 0, 0) 4px
+  );
+  opacity: 0.5;
+}
+
+/* ---- Flicker (luces intermitentes inestables) ------------------------- */
+.flicker {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background: radial-gradient(circle at 50% 30%, rgba(21, 196, 106, 0.05), transparent 70%);
+  animation: flicker 7s infinite;
+}
+@keyframes flicker {
+  0%, 100% { opacity: 0.9; }
+  47% { opacity: 0.9; }
+  48% { opacity: 0.3; }
+  49% { opacity: 0.85; }
+  50% { opacity: 0.2; }
+  51% { opacity: 0.9; }
+  72% { opacity: 0.9; }
+  73% { opacity: 0.4; }
+  74% { opacity: 0.9; }
+}
+
+/* ---- Glitch en títulos ------------------------------------------------ */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.glitch::before {
+  color: var(--verde-esmeralda);
+  clip-path: inset(0 0 55% 0);
+  animation: glitch-arriba 3s infinite linear alternate;
+}
+.glitch::after {
+  color: var(--rojo);
+  clip-path: inset(55% 0 0 0);
+  animation: glitch-abajo 2.4s infinite linear alternate;
+}
+@keyframes glitch-arriba {
+  0%, 92%, 100% { transform: translate(0); opacity: 0; }
+  93% { transform: translate(-2px, -1px); opacity: 0.6; }
+  97% { transform: translate(2px, 1px); opacity: 0.6; }
+}
+@keyframes glitch-abajo {
+  0%, 90%, 100% { transform: translate(0); opacity: 0; }
+  91% { transform: translate(2px, 1px); opacity: 0.6; }
+  95% { transform: translate(-2px, -1px); opacity: 0.6; }
+}
+
+/* ---- ECG / latido del monitor en pantallas ---------------------------- */
+.monitor-latido {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.15) 3px, transparent 4px),
+    linear-gradient(transparent 96%, var(--verde-esmeralda-tenue) 100%);
+  opacity: 0.4;
+  animation: flicker 6s infinite;
+}
+
+/* Respeta a quien prefiere menos movimiento. */
+@media (prefers-reduced-motion: reduce) {
+  .flicker, .glitch::before, .glitch::after, .monitor-latido { animation: none; }
+}

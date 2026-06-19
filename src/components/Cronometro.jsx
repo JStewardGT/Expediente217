@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { sonarAlarma } from '../audio/sonido.js'
 
 // Cronómetro visible en cuenta regresiva. Avisa con onAgotado al llegar a 0.
 export default function Cronometro({ minutos, activo, onAgotado }) {
@@ -19,6 +20,13 @@ export default function Cronometro({ minutos, activo, onAgotado }) {
       onAgotado?.()
     }
   }, [restante, onAgotado])
+
+  // Alarma cada 2s durante el último minuto.
+  useEffect(() => {
+    if (restante <= 60 && restante > 0 && restante % 2 === 0) {
+      sonarAlarma()
+    }
+  }, [restante])
 
   const mm = String(Math.floor(restante / 60)).padStart(2, '0')
   const ss = String(restante % 60).padStart(2, '0')
