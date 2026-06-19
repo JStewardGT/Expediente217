@@ -32,7 +32,7 @@ export const INTRO = {
 }
 
 export const CONFIG = {
-  duracionMinutos: 20, // cronómetro visible
+  duracionMinutos: 10, // cronómetro visible
   pistasDisponibles: 2, // pistas por equipo
 }
 
@@ -127,11 +127,11 @@ export const SALAS = [
     pregunta: 'Toca y localiza las tres estructuras señaladas.',
     pista: 'El conducto pancreático recorre el órgano y desemboca en el duodeno; los acinos son las unidades que producen las enzimas.',
     tipo: 'imagen',
-    imagen: 'anatomia-pancreas', // esquema SVG (sustituible por imagen real en Día 4)
+    imagen: 'anatomia-pancreas', // esquema SVG (vista anterior)
     objetivos: [
-      { nombre: 'Acinos pancreáticos', x: 27, y: 45, r: 9 },
-      { nombre: 'Conducto pancreático', x: 54, y: 55, r: 9 },
-      { nombre: 'Duodeno', x: 80, y: 60, r: 9 },
+      { nombre: 'Acinos pancreáticos', x: 24, y: 83, r: 13 },
+      { nombre: 'Conducto pancreático', x: 40, y: 48, r: 7 },
+      { nombre: 'Duodeno', x: 71, y: 50, r: 8 },
     ],
   },
 
@@ -182,11 +182,11 @@ export const SALAS = [
     pregunta: 'Localiza el páncreas, el conducto pancreático y el duodeno.',
     pista: 'El páncreas está detrás del estómago; su conducto desemboca en la primera porción del intestino delgado: el duodeno.',
     tipo: 'imagen',
-    imagen: 'abdomen', // esquema SVG (sustituible por imagen real en Día 4)
+    imagen: 'abdomen', // esquema SVG (vista anterior)
     objetivos: [
-      { nombre: 'Páncreas', x: 44, y: 52, r: 9 },
-      { nombre: 'Conducto pancreático', x: 60, y: 56, r: 8 },
-      { nombre: 'Duodeno', x: 80, y: 60, r: 9 },
+      { nombre: 'Páncreas', x: 36, y: 44, r: 9 },
+      { nombre: 'Conducto pancreático', x: 50, y: 52, r: 6 },
+      { nombre: 'Duodeno', x: 71, y: 50, r: 8 },
     ],
   },
 

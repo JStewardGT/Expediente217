@@ -19,7 +19,7 @@ No se "escapa" de una habitación física: se escapa de una **emergencia médica
 ## ✨ Características
 
 - 🎮 **14 salas** con progresión lineal (no se avanza sin resolver el reto anterior).
-- ⏱️ **Cronómetro** visible en cuenta regresiva (20 minutos). Si llega a cero, el soporte
+- ⏱️ **Cronómetro** visible en cuenta regresiva (10 minutos). Si llega a cero, el soporte
   vital falla y el juego termina.
 - 💡 **Sistema de pistas:** 2 pistas disponibles por equipo.
 - 📱 **Diseño móvil primero** (vertical), jugable desde el navegador del celular sin instalar nada.
