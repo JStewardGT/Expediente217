@@ -1,9 +1,20 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Acierto from './comun/Acierto.jsx'
+
+function barajar(arr) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
 
 // Mecánica de selección única o múltiple (salas 1, 2, 6, 7, 10, 13).
 export default function Seleccion({ sala, onResuelto }) {
   const { opciones, correctas, multiple, recompensa } = sala
+  // Barajar para que la(s) respuesta(s) correcta(s) no queden siempre primero.
+  const opcionesMezcladas = useMemo(() => barajar(opciones), [opciones])
   const [seleccion, setSeleccion] = useState([])
   const [estado, setEstado] = useState('jugando') // jugando | error | ok
 
@@ -33,7 +44,7 @@ export default function Seleccion({ sala, onResuelto }) {
   return (
     <div className="mecanica seleccion">
       <ul className="opciones">
-        {opciones.map((op) => {
+        {opcionesMezcladas.map((op) => {
           const activa = seleccion.includes(op)
           return (
             <li key={op}>
