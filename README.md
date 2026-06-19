@@ -166,7 +166,7 @@ Expediente217/
 - [x] Motor data-driven, cronómetro y sistema de pistas
 - [x] 14 salas cargadas como datos
 - [x] Mecánicas: selección, candado, respuesta abierta, secuencia
-- [ ] Mecánicas: emparejar e imagen interactiva
+- [x] Mecánicas: emparejar (tap y memoria) e imagen interactiva
 - [ ] Ambientación visual y sonora completa (efectos, audio)
 - [ ] Despliegue en GitHub Pages
 

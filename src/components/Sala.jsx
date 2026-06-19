@@ -2,15 +2,18 @@ import Seleccion from './Seleccion.jsx'
 import Candado from './Candado.jsx'
 import RespuestaAbierta from './RespuestaAbierta.jsx'
 import Secuencia from './Secuencia.jsx'
+import Emparejar from './Emparejar.jsx'
+import ImagenInteractiva from './ImagenInteractiva.jsx'
 
 // Dispatcher de salas: lee `sala.tipo` y renderiza la mecánica correspondiente.
-// Implementadas (Día 2): seleccion, candado, abierta, secuencia.
-// Pendientes (Día 3): emparejar, imagen -> usan el renderizador provisional.
+// Las 6 mecánicas están implementadas.
 const MECANICAS = {
   seleccion: Seleccion,
   candado: Candado,
   abierta: RespuestaAbierta,
   secuencia: Secuencia,
+  emparejar: Emparejar,
+  imagen: ImagenInteractiva,
 }
 
 export default function Sala({ sala, onResuelto }) {
@@ -25,23 +28,9 @@ export default function Sala({ sala, onResuelto }) {
         {Mecanica ? (
           <Mecanica sala={sala} onResuelto={onResuelto} />
         ) : (
-          <MecanicaProvisional sala={sala} onResuelto={onResuelto} />
+          <p className="feedback-error">Mecánica no reconocida: {sala.tipo}</p>
         )}
       </div>
     </section>
-  )
-}
-
-// Provisional para mecánicas aún no construidas (emparejar, imagen).
-function MecanicaProvisional({ sala, onResuelto }) {
-  return (
-    <div className="provisional">
-      <span className="provisional-etiqueta">
-        Mecánica pendiente: <code>{sala.tipo}</code>
-      </span>
-      <button className="btn-principal" onClick={onResuelto}>
-        {sala.esFinal ? 'Establecer diagnóstico' : 'Resolver reto'}
-      </button>
-    </div>
   )
 }
