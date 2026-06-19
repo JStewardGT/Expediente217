@@ -9,3 +9,6 @@ dist-ssr
 # Archivos temporales de Office (el .docx del cliente)
 ~$*
 .~lock.*#
+
+# Documento interno de planeación (no se publica)
+PLAN-DE-ACCION.md
