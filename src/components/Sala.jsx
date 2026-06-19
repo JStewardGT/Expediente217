@@ -1,10 +1,20 @@
+import Seleccion from './Seleccion.jsx'
+import Candado from './Candado.jsx'
+import RespuestaAbierta from './RespuestaAbierta.jsx'
+import Secuencia from './Secuencia.jsx'
+
 // Dispatcher de salas: lee `sala.tipo` y renderiza la mecánica correspondiente.
-// DÍA 1: marco de la sala + mecánica PROVISIONAL (botón de resolver).
-// DÍA 2-3: reemplazar el bloque "MecanicaProvisional" por los componentes reales:
-//   seleccion -> <Seleccion/>, emparejar -> <Emparejar/>, candado -> <Candado/>,
-//   imagen -> <ImagenInteractiva/>, abierta -> <RespuestaAbierta/>, secuencia -> <Secuencia/>.
+// Implementadas (Día 2): seleccion, candado, abierta, secuencia.
+// Pendientes (Día 3): emparejar, imagen -> usan el renderizador provisional.
+const MECANICAS = {
+  seleccion: Seleccion,
+  candado: Candado,
+  abierta: RespuestaAbierta,
+  secuencia: Secuencia,
+}
 
 export default function Sala({ sala, onResuelto }) {
+  const Mecanica = MECANICAS[sala.tipo]
   return (
     <section className="sala">
       <h2 className="sala-nombre">{sala.nombre}</h2>
@@ -12,15 +22,17 @@ export default function Sala({ sala, onResuelto }) {
       <p className="sala-pregunta">{sala.pregunta}</p>
 
       <div className="sala-mecanica">
-        <MecanicaProvisional sala={sala} onResuelto={onResuelto} />
+        {Mecanica ? (
+          <Mecanica sala={sala} onResuelto={onResuelto} />
+        ) : (
+          <MecanicaProvisional sala={sala} onResuelto={onResuelto} />
+        )}
       </div>
     </section>
   )
 }
 
-// --- Provisional (Día 1) -----------------------------------------------------
-// Permite recorrer y validar el flujo de las 14 salas mientras se construyen
-// las mecánicas reales. Muestra el tipo de mecánica que irá en cada sala.
+// Provisional para mecánicas aún no construidas (emparejar, imagen).
 function MecanicaProvisional({ sala, onResuelto }) {
   return (
     <div className="provisional">

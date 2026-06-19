@@ -211,3 +211,152 @@ body.jugando { overflow: hidden; }
 
 @keyframes parpadeo { 50% { opacity: 0.3; } }
 @keyframes aparecer { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes sacudir {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-7px); }
+  40%, 80% { transform: translateX(7px); }
+}
+
+/* =========================================================================
+   MECÁNICAS (Día 2)
+   ========================================================================= */
+.mecanica { animation: aparecer 0.3s ease; }
+.feedback-error {
+  color: var(--rojo);
+  font-size: 0.9rem;
+  margin: 12px 0;
+  font-weight: 600;
+}
+
+/* ---- Acierto (panel compartido) --------------------------------------- */
+.acierto {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px;
+  border: 1px solid var(--verde-esmeralda);
+  border-radius: var(--radio);
+  background: var(--verde-esmeralda-tenue);
+  animation: aparecer 0.3s ease;
+}
+.acierto-titulo { color: var(--verde-esmeralda); font-weight: 700; font-size: 1.2rem; margin: 0; }
+.acierto-recompensa { margin: 0; opacity: 0.9; line-height: 1.5; }
+
+/* ---- Selección -------------------------------------------------------- */
+.opciones { list-style: none; padding: 0; margin: 0 0 8px; display: flex; flex-direction: column; gap: 10px; }
+.opcion {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--gris-oscuro);
+  color: var(--blanco-tenue);
+  border: 1px solid transparent;
+  border-radius: var(--radio);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.opcion:hover { border-color: var(--verde-esmeralda); }
+.opcion.activa { border-color: var(--verde-esmeralda); background: var(--verde-esmeralda-tenue); }
+.opcion-marca { color: var(--verde-esmeralda); font-size: 1.1rem; }
+
+/* ---- Candado ---------------------------------------------------------- */
+.candado-acertijo {
+  line-height: 1.5;
+  background: var(--gris-oscuro);
+  border-left: 3px solid var(--amarillo);
+  padding: 12px;
+  border-radius: 0 var(--radio) var(--radio) 0;
+  margin: 0 0 18px;
+  font-size: 0.92rem;
+}
+.candado-display { display: flex; gap: 12px; justify-content: center; margin: 0 0 18px; }
+.candado-display.sacudir { animation: sacudir 0.4s; }
+.candado-casilla {
+  width: 48px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--verde-esmeralda);
+  background: var(--negro);
+  border: 1px solid var(--verde-esmeralda);
+  border-radius: var(--radio);
+}
+.teclado { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 280px; margin: 0 auto; }
+.tecla {
+  padding: 16px 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: var(--gris-oscuro);
+  color: var(--blanco-tenue);
+  border: 1px solid var(--verde-esmeralda-tenue);
+  border-radius: var(--radio);
+  cursor: pointer;
+}
+.tecla:active { transform: scale(0.95); }
+.tecla-aux { color: var(--amarillo); }
+.tecla-ok { color: var(--negro); background: var(--verde-esmeralda); }
+.tecla-ok:disabled { opacity: 0.4; }
+
+/* ---- Respuesta abierta ------------------------------------------------ */
+.abierta-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  background: var(--negro);
+  color: var(--blanco-tenue);
+  border: 1px solid var(--verde-esmeralda);
+  border-radius: var(--radio);
+  margin-bottom: 8px;
+}
+.abierta-input:focus { outline: none; box-shadow: 0 0 12px var(--verde-esmeralda-tenue); }
+
+/* ---- Secuencia -------------------------------------------------------- */
+.secuencia-instr { font-size: 0.9rem; opacity: 0.8; margin: 0 0 12px; }
+.secuencia-orden {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px dashed var(--verde-esmeralda-tenue);
+  border-radius: var(--radio);
+  padding: 10px;
+}
+.secuencia-vacio { opacity: 0.4; font-style: italic; font-size: 0.85rem; }
+.secuencia-banco { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+.paso {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: var(--gris-oscuro);
+  color: var(--blanco-tenue);
+  border: 1px solid var(--verde-esmeralda-tenue);
+  border-radius: var(--radio);
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+.paso.elegido { width: 100%; justify-content: flex-start; border-color: var(--verde-esmeralda); background: var(--verde-esmeralda-tenue); }
+.paso-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--verde-esmeralda);
+  color: var(--negro);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.paso-x { margin-left: auto; color: var(--rojo); }
