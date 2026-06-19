@@ -108,14 +108,26 @@ export const SALAS = [
     id: 4,
     nombre: 'Sala del bicarbonato',
     narrativa:
-      'Una puerta oxidada tiene un candado de cuatro dígitos. El bicarbonato pancreático neutraliza el ácido gástrico que llega al duodeno.',
-    pregunta: 'Introduce el código de 4 dígitos para abrir la puerta.',
-    pista: 'El código combina el número del caso (217) con un último dígito: el pH de la sangre es 7,4… usa ese 4. → 2174',
+      'Una puerta oxidada tiene un candado numérico. En la sala hay tres elementos que esconden pistas: un frasco, una radiografía y un monitor.',
+    pregunta: 'Descubre las tres pistas y arma el código para abrir la puerta.',
+    pista: 'Toca el frasco, la radiografía y el monitor. Cada uno revela una palabra del enunciado y un número. El código son esos tres números, en orden.',
     tipo: 'candado',
-    longitud: 4,
-    codigo: '2174',
-    acertijo:
-      'El bicarbonato neutraliza el ácido gástrico. El código está en el expediente: el número del caso seguido del decimal del pH sanguíneo (7,4).',
+    longitud: 3,
+    codigo: '327',
+    // Enunciado con huecos: cada hueco se llena al descubrir su pista interactiva.
+    enunciado: {
+      partes: [
+        'El ',
+        ' neutraliza el ácido en el ',
+        ' y permite que las enzimas funcionen en un pH cercano a ',
+        '.',
+      ],
+    },
+    pistasInteractivas: [
+      { id: 'frasco', icono: '🧪', nombre: 'Frasco etiquetado', palabra: 'bicarbonato', revela: 'Laboratorio 3', digito: '3' },
+      { id: 'radiografia', icono: '🩻', nombre: 'Radiografía', palabra: 'duodeno', revela: 'Duodeno 2', digito: '2' },
+      { id: 'monitor', icono: '🖥️', nombre: 'Monitor de pH', palabra: '7', revela: 'pH ideal: 7', digito: '7' },
+    ],
   },
 
   // ---- SALA 5 ----------------------------------------------------------------

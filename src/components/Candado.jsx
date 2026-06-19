@@ -2,11 +2,14 @@ import { useState } from 'react'
 import Acierto from './comun/Acierto.jsx'
 import { sonarError } from '../audio/sonido.js'
 
-// Candado numérico de N dígitos (sala 4).
+// Candado numérico (sala 4).
+// Si la sala trae `pistasInteractivas`, primero se muestran los elementos a tocar
+// que revelan las palabras del enunciado y los dígitos del código.
 export default function Candado({ sala, onResuelto }) {
-  const { codigo, longitud, acertijo, recompensa } = sala
+  const { codigo, longitud, acertijo, recompensa, enunciado, pistasInteractivas } = sala
   const [entrada, setEntrada] = useState('')
   const [estado, setEstado] = useState('jugando') // jugando | error | ok
+  const [descubiertos, setDescubiertos] = useState([]) // ids de pistas reveladas
 
   const pulsar = (d) => {
     if (estado === 'ok') return
@@ -23,6 +26,10 @@ export default function Candado({ sala, onResuelto }) {
     setEstado(ok ? 'ok' : 'error')
   }
 
+  const descubrir = (id) => {
+    setDescubiertos((d) => (d.includes(id) ? d : [...d, id]))
+  }
+
   if (estado === 'ok') {
     return (
       <Acierto
@@ -36,7 +43,55 @@ export default function Candado({ sala, onResuelto }) {
 
   return (
     <div className="mecanica candado">
+      {/* --- Pistas interactivas (descubrimiento) --- */}
+      {pistasInteractivas && (
+        <>
+          {enunciado && (
+            <p className="candado-enunciado">
+              {enunciado.partes.map((parte, i) => {
+                const pista = pistasInteractivas[i]
+                const revelada = pista && descubiertos.includes(pista.id)
+                return (
+                  <span key={i}>
+                    {parte}
+                    {pista && (
+                      <strong className={`hueco ${revelada ? 'lleno' : ''}`}>
+                        {revelada ? pista.palabra : '_____'}
+                      </strong>
+                    )}
+                  </span>
+                )
+              })}
+            </p>
+          )}
+
+          <div className="candado-objetos">
+            {pistasInteractivas.map((pista) => {
+              const revelada = descubiertos.includes(pista.id)
+              return (
+                <button
+                  key={pista.id}
+                  className={`objeto ${revelada ? 'revelado' : ''}`}
+                  onClick={() => descubrir(pista.id)}
+                >
+                  <span className="objeto-icono">{pista.icono}</span>
+                  <span className="objeto-nombre">{pista.nombre}</span>
+                  {revelada && (
+                    <span className="objeto-revela">
+                      {pista.revela}
+                      <span className="objeto-digito">dígito {pista.digito}</span>
+                    </span>
+                  )}
+                </button>
+              )
+            })}
+          </div>
+        </>
+      )}
+
       {acertijo && <p className="candado-acertijo">{acertijo}</p>}
+
+      {/* --- Teclado --- */}
       <div className={`candado-display ${estado === 'error' ? 'sacudir' : ''}`}>
         {casillas.map((c, i) => (
           <span key={i} className="candado-casilla">

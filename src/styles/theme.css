@@ -272,6 +272,63 @@ body.jugando { overflow: hidden; }
   margin: 0 0 18px;
   font-size: 0.92rem;
 }
+/* Enunciado con huecos que se rellenan al descubrir pistas */
+.candado-enunciado {
+  line-height: 1.7;
+  background: var(--gris-oscuro);
+  border-left: 3px solid var(--verde-esmeralda);
+  padding: 12px 14px;
+  border-radius: 0 var(--radio) var(--radio) 0;
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+}
+.hueco {
+  color: var(--amarillo);
+  border-bottom: 1px dashed var(--amarillo);
+  padding: 0 4px;
+}
+.hueco.lleno { border-bottom-style: solid; color: var(--verde-esmeralda); }
+
+/* Objetos a tocar para descubrir las pistas */
+.candado-objetos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 0 0 18px;
+}
+.objeto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 12px 6px;
+  background: var(--gris-oscuro);
+  color: var(--blanco-tenue);
+  border: 1px solid var(--verde-esmeralda-tenue);
+  border-radius: var(--radio);
+  cursor: pointer;
+  text-align: center;
+  min-height: 96px;
+  justify-content: center;
+}
+.objeto:hover { border-color: var(--verde-esmeralda); }
+.objeto.revelado { border-color: var(--verde-esmeralda); background: var(--verde-esmeralda-tenue); }
+.objeto-icono { font-size: 1.8rem; line-height: 1; }
+.objeto-nombre { font-size: 0.68rem; opacity: 0.85; }
+.objeto-revela {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.68rem;
+  color: var(--amarillo);
+  margin-top: 2px;
+}
+.objeto-digito {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--verde-esmeralda);
+}
+
 .candado-display { display: flex; gap: 12px; justify-content: center; margin: 0 0 18px; }
 .candado-display.sacudir { animation: sacudir 0.4s; }
 .candado-casilla {
