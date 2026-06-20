@@ -12,3 +12,7 @@ dist-ssr
 
 # Documento interno de planeación (no se publica)
 PLAN-DE-ACCION.md
+
+# Archivos fuente de Affinity (no se versionan, solo los export)
+*.af
+*~lock~

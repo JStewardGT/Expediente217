@@ -13,6 +13,12 @@ import sala5Acinos from '../assets/sala5/sala5-acinos.png'
 import sala5Conducto from '../assets/sala5/sala5-conducto.png'
 import sala5Duodeno from '../assets/sala5/sala5-duodeno.png'
 
+// Assets de la sala 8 (tocar para localizar)
+import sala8Fondo from '../assets/sala8/sala8-fondo.jpg'
+import sala8Pancreas from '../assets/sala8/sala8-pancreas.png'
+import sala8Conducto from '../assets/sala8/sala8-conducto.png'
+import sala8Duodeno from '../assets/sala8/sala8-duodeno.png'
+
 export const PACIENTE = {
   nombre: 'Carlos Eduardo Ramírez Corrales',
   edad: 42,
@@ -201,14 +207,19 @@ export const SALAS = [
     nombre: 'El conducto prohibido',
     narrativa:
       'En una imagen del abdomen, ocultas entre las sombras, debes encontrar tres estructuras.',
-    pregunta: 'Localiza el páncreas, el conducto pancreático y el duodeno.',
-    pista: 'El páncreas está detrás del estómago; su conducto desemboca en la primera porción del intestino delgado: el duodeno.',
-    tipo: 'imagen',
-    imagen: 'abdomen', // esquema SVG (vista anterior)
-    objetivos: [
-      { nombre: 'Páncreas', x: 36, y: 44, r: 9 },
-      { nombre: 'Conducto pancreático', x: 50, y: 52, r: 6 },
-      { nombre: 'Duodeno', x: 71, y: 50, r: 8 },
+    pregunta: 'Arrastra cada estructura a su lugar en el abdomen.',
+    pista: 'El páncreas está detrás del estómago; su conducto sale hacia el duodeno, el asa en C de la primera porción del intestino delgado.',
+    tipo: 'reconstruir',
+    pantallaCompleta: true, // el fondo ya trae título/instrucción: se oculta el encabezado del juego
+    fondo: sala8Fondo,
+    fondoAspecto: '877 / 1024', // ancho / alto del fondo
+    tolerancia: 10, // % de cercanía para que la pieza "encaje"
+    recompensa: 'Estructuras ubicadas. El expediente continúa.',
+    // NOTA: posiciones `destino` provisionales — se afinan visualmente contra el fondo.
+    piezas: [
+      { id: 'pancreas', nombre: 'Páncreas', img: sala8Pancreas, ancho: 67.8, destino: { x: 53, y: 54 } },
+      { id: 'conducto', nombre: 'Conducto pancreático', img: sala8Conducto, ancho: 63.1, destino: { x: 50, y: 54 } },
+      { id: 'duodeno', nombre: 'Duodeno', img: sala8Duodeno, ancho: 43.0, destino: { x: 30, y: 60 } },
     ],
   },
 

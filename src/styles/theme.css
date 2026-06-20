@@ -460,59 +460,7 @@ body.jugando { overflow: hidden; }
 .carta.visible { background: var(--gris-oscuro); border-color: var(--verde-esmeralda); }
 .carta.resuelta { border-color: var(--verde-esmeralda); background: var(--verde-esmeralda-tenue); cursor: default; }
 
-/* ---- Imagen interactiva ----------------------------------------------- */
-.imagen-objetivo { font-size: 1rem; margin: 0 0 12px; }
-.imagen-objetivo strong { color: var(--amarillo); }
-.imagen-lienzo {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background: radial-gradient(circle at 50% 40%, rgba(21, 196, 106, 0.06), transparent 70%), var(--negro);
-  border: 1px solid var(--verde-esmeralda-tenue);
-  border-radius: var(--radio);
-  overflow: hidden;
-}
-.anatomia { position: absolute; inset: 0; width: 100%; height: 100%; }
-.zona {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: transparent;
-  border: 1.5px dashed rgba(215, 219, 224, 0.25);
-  cursor: pointer;
-  padding: 0;
-}
-.zona:hover { border-color: var(--amarillo); background: rgba(244, 200, 74, 0.08); }
-.zona.hecha {
-  border: 2px solid var(--verde-esmeralda);
-  background: var(--verde-esmeralda-tenue);
-  cursor: default;
-}
-.zona.sacudir { animation: sacudir 0.4s; border-color: var(--rojo); }
-.zona-etiqueta {
-  position: absolute;
-  left: 50%;
-  top: -6px;
-  transform: translate(-50%, -100%);
-  white-space: nowrap;
-  font-size: 0.62rem;
-  color: var(--verde-esmeralda);
-  background: var(--negro);
-  border: 1px solid var(--verde-esmeralda);
-  border-radius: 6px;
-  padding: 1px 5px;
-}
-.imagen-progreso { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-.chip {
-  font-size: 0.72rem;
-  padding: 4px 8px;
-  border-radius: 20px;
-  border: 1px solid var(--verde-esmeralda-tenue);
-  opacity: 0.7;
-}
-.chip.ok { color: var(--verde-esmeralda); border-color: var(--verde-esmeralda); opacity: 1; }
-
-/* ---- Reconstruir (arrastrar piezas, sala 5) --------------------------- */
+/* ---- Reconstruir (arrastrar piezas, salas 5 y 8) --------------------- */
 .recon-lienzo {
   position: relative;
   width: 100%;
@@ -535,7 +483,7 @@ body.jugando { overflow: hidden; }
   position: absolute;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  filter: drop-shadow(0 0 6px var(--verde-esmeralda));
+  filter: drop-shadow(0 0 3px var(--verde-esmeralda));
   /* keyframe que CONSERVA el centrado (translate -50%,-50%) para que no salte */
   animation: recon-encajar 0.25s ease;
 }
