@@ -44,7 +44,7 @@ export const INTRO = {
 }
 
 export const CONFIG = {
-  duracionMinutos: 10, // cronómetro visible
+  duracionMinutos: 18, // cronómetro visible
   pistasDisponibles: 2, // pistas por equipo
 }
 
