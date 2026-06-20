@@ -512,6 +512,81 @@ body.jugando { overflow: hidden; }
 }
 .chip.ok { color: var(--verde-esmeralda); border-color: var(--verde-esmeralda); opacity: 1; }
 
+/* ---- Reconstruir (arrastrar piezas, sala 5) --------------------------- */
+.recon-lienzo {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--verde-esmeralda-tenue);
+  border-radius: var(--radio);
+  overflow: hidden;
+  background: var(--negro);
+  touch-action: none; /* sin scroll al arrastrar sobre el lienzo */
+}
+.recon-fondo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.recon-colocada {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px var(--verde-esmeralda));
+  /* keyframe que CONSERVA el centrado (translate -50%,-50%) para que no salte */
+  animation: recon-encajar 0.25s ease;
+}
+@keyframes recon-encajar {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.82); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+.recon-flotante {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  /* el ancho lo da el estilo inline (mismo % que tendrá al encajar) */
+  pointer-events: none;
+  opacity: 0.9;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
+  z-index: 4;
+}
+.recon-ayuda {
+  text-align: center;
+  font-size: 0.82rem;
+  opacity: 0.75;
+  margin: 12px 0;
+}
+.recon-bandeja {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+.recon-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  background: var(--gris-oscuro);
+  border: 1px solid var(--verde-esmeralda-tenue);
+  border-radius: var(--radio);
+}
+.recon-pieza {
+  height: 84px;
+  width: auto;
+  max-width: 130px;
+  object-fit: contain;
+  cursor: grab;
+  touch-action: none; /* clave: el arrastre no mueve la página */
+  -webkit-user-drag: none;
+}
+.recon-pieza:active { cursor: grabbing; }
+.recon-pieza.oculta { opacity: 0; } /* sigue en el DOM para conservar el pointer capture */
+.recon-pieza-nombre { font-size: 0.62rem; opacity: 0.8; text-align: center; max-width: 120px; }
+
 /* =========================================================================
    AMBIENTACIÓN (Día 4)
    ========================================================================= */

@@ -4,9 +4,9 @@ import RespuestaAbierta from './RespuestaAbierta.jsx'
 import Secuencia from './Secuencia.jsx'
 import Emparejar from './Emparejar.jsx'
 import ImagenInteractiva from './ImagenInteractiva.jsx'
+import Reconstruir from './Reconstruir.jsx'
 
 // Dispatcher de salas: lee `sala.tipo` y renderiza la mecánica correspondiente.
-// Las 6 mecánicas están implementadas.
 const MECANICAS = {
   seleccion: Seleccion,
   candado: Candado,
@@ -14,6 +14,7 @@ const MECANICAS = {
   secuencia: Secuencia,
   emparejar: Emparejar,
   imagen: ImagenInteractiva,
+  reconstruir: Reconstruir,
 }
 
 export default function Sala({ sala, onResuelto }) {

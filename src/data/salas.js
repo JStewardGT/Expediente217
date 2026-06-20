@@ -3,9 +3,15 @@
 // -----------------------------------------------------------------------------
 //  Cada sala define: identidad + narrativa + pregunta + PISTA + mecánica.
 //  El motor (App.jsx) lee `tipo` y renderiza el componente de mecánica correcto.
-//  Tipos: seleccion | emparejar | candado | imagen | abierta | secuencia
+//  Tipos: seleccion | emparejar | candado | imagen | abierta | secuencia | reconstruir
 //  Contenido basado en `Scape Room .md`.
 // =============================================================================
+
+// Assets de la sala 5 (arrastrar para reconstruir)
+import sala5Fondo from '../assets/sala5/sala5-fondo.jpg'
+import sala5Acinos from '../assets/sala5/sala5-acinos.png'
+import sala5Conducto from '../assets/sala5/sala5-conducto.png'
+import sala5Duodeno from '../assets/sala5/sala5-duodeno.png'
 
 export const PACIENTE = {
   nombre: 'Carlos Eduardo Ramírez Corrales',
@@ -135,15 +141,19 @@ export const SALAS = [
     id: 5,
     nombre: 'Sala de anatomía olvidada',
     narrativa:
-      'Una radiografía dañada muestra el páncreas. Debes reconstruirlo y localizar sus estructuras tocando cada zona.',
-    pregunta: 'Toca y localiza las tres estructuras señaladas.',
-    pista: 'El conducto pancreático recorre el órgano y desemboca en el duodeno; los acinos son las unidades que producen las enzimas.',
-    tipo: 'imagen',
-    imagen: 'anatomia-pancreas', // esquema SVG (vista anterior)
-    objetivos: [
-      { nombre: 'Acinos pancreáticos', x: 24, y: 83, r: 13 },
-      { nombre: 'Conducto pancreático', x: 40, y: 48, r: 7 },
-      { nombre: 'Duodeno', x: 71, y: 50, r: 8 },
+      'El páncreas quedó incompleto. En la bandeja están las piezas que faltan: hay que reconstruirlo.',
+    pregunta: 'Arrastra cada estructura a su lugar para reconstruir el páncreas.',
+    pista: 'El conducto pancreático recorre el centro del órgano; los acinos son los racimos; el duodeno es el asa que abraza la cabeza del páncreas.',
+    tipo: 'reconstruir',
+    fondo: sala5Fondo,
+    fondoAspecto: '988 / 1024', // ancho / alto del fondo
+    tolerancia: 9, // % de cercanía para que la pieza "encaje"
+    recompensa: 'Anatomía reconstruida. El expediente continúa.',
+    // NOTA: posiciones `destino` provisionales — se afinan con el fondo de huecos.
+    piezas: [
+      { id: 'acinos', nombre: 'Acinos pancreáticos', img: sala5Acinos, ancho: 33.2, destino: { x: 44, y: 48 } },
+      { id: 'conducto', nombre: 'Conducto pancreático', img: sala5Conducto, ancho: 36.9, destino: { x: 63, y: 43 } },
+      { id: 'duodeno', nombre: 'Duodeno', img: sala5Duodeno, ancho: 51.7, destino: { x: 33, y: 50 } },
     ],
   },
 
