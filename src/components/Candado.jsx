@@ -6,7 +6,16 @@ import { sonarError } from '../audio/sonido.js'
 // Si la sala trae `pistasInteractivas`, primero se muestran los elementos a tocar
 // que revelan las palabras del enunciado y los dígitos del código.
 export default function Candado({ sala, onResuelto }) {
-  const { codigo, longitud, acertijo, recompensa, enunciado, pistasInteractivas } = sala
+  const {
+    codigo,
+    longitud,
+    acertijo,
+    recompensa,
+    enunciado,
+    pistasInteractivas,
+    imagenFondo,
+    imagenAspecto,
+  } = sala
   const [entrada, setEntrada] = useState('')
   const [estado, setEstado] = useState('jugando') // jugando | error | ok
   const [descubiertos, setDescubiertos] = useState([]) // ids de pistas reveladas
@@ -65,22 +74,27 @@ export default function Candado({ sala, onResuelto }) {
             </p>
           )}
 
-          <div className="candado-objetos">
+          <div className="candado-lienzo" style={{ aspectRatio: imagenAspecto }}>
+            <img className="candado-fondo" src={imagenFondo} alt="" draggable="false" />
             {pistasInteractivas.map((pista) => {
               const revelada = descubiertos.includes(pista.id)
+              const { x, y, ancho, alto } = pista.posicion
               return (
                 <button
                   key={pista.id}
-                  className={`objeto ${revelada ? 'revelado' : ''}`}
+                  type="button"
+                  className={`candado-hotspot ${revelada ? 'revelado' : ''}`}
                   onClick={() => descubrir(pista.id)}
+                  aria-label={pista.nombre}
+                  style={{
+                    left: `${x}%`,
+                    top: `${y}%`,
+                    width: `${ancho}%`,
+                    height: `${alto}%`,
+                  }}
                 >
-                  <span className="objeto-icono">{pista.icono}</span>
-                  <span className="objeto-nombre">{pista.nombre}</span>
                   {revelada && (
-                    <span className="objeto-revela">
-                      {pista.revela}
-                      <span className="objeto-digito">dígito {pista.digito}</span>
-                    </span>
+                    <span className="candado-hotspot-digito">{pista.digito}</span>
                   )}
                 </button>
               )

@@ -289,44 +289,65 @@ body.jugando { overflow: hidden; }
 }
 .hueco.lleno { border-bottom-style: solid; color: var(--verde-esmeralda); }
 
-/* Objetos a tocar para descubrir las pistas */
-.candado-objetos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin: 0 0 18px;
-}
-.objeto {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  padding: 12px 6px;
-  background: var(--gris-oscuro);
-  color: var(--blanco-tenue);
+/* Lienzo con la escena: cada hotspot cubre un letrero de neón.
+   Al tocar se revela el dígito como un overlay sobre el cartel. */
+.candado-lienzo {
+  position: relative;
+  width: 100%;
   border: 1px solid var(--verde-esmeralda-tenue);
   border-radius: var(--radio);
+  overflow: hidden;
+  background: var(--negro);
+  margin: 0 0 18px;
+}
+.candado-fondo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+.candado-hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: 1px dashed transparent;
+  border-radius: var(--radio);
+  padding: 0;
   cursor: pointer;
-  text-align: center;
-  min-height: 96px;
-  justify-content: center;
-}
-.objeto:hover { border-color: var(--verde-esmeralda); }
-.objeto.revelado { border-color: var(--verde-esmeralda); background: var(--verde-esmeralda-tenue); }
-.objeto-icono { font-size: 1.8rem; line-height: 1; }
-.objeto-nombre { font-size: 0.68rem; opacity: 0.85; }
-.objeto-revela {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
-  font-size: 0.68rem;
-  color: var(--amarillo);
-  margin-top: 2px;
+  align-items: center;
+  justify-content: center;
+  animation: hotspot-pulso 2.6s ease-in-out infinite;
 }
-.objeto-digito {
-  font-size: 0.95rem;
-  font-weight: 700;
+.candado-hotspot:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(0, 0, 0, 0.18);
+}
+.candado-hotspot.revelado {
+  animation: none;
+  cursor: default;
+  border-color: var(--verde-esmeralda);
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(1px);
+}
+.candado-hotspot-digito {
+  font-size: clamp(1.8rem, 7vw, 2.8rem);
+  font-weight: 800;
   color: var(--verde-esmeralda);
+  text-shadow: 0 0 14px var(--verde-esmeralda);
+  animation: hotspot-aparece 0.25s ease;
+}
+@keyframes hotspot-pulso {
+  0%, 100% { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06); }
+  50%      { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.30); }
+}
+@keyframes hotspot-aparece {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 .candado-display { display: flex; gap: 12px; justify-content: center; margin: 0 0 18px; }

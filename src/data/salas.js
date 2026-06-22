@@ -19,6 +19,9 @@ import sala8Pancreas from '../assets/sala8/sala8-pancreas.png'
 import sala8Conducto from '../assets/sala8/sala8-conducto.png'
 import sala8Duodeno from '../assets/sala8/sala8-duodeno.png'
 
+// Asset de la sala 4 (escena con letreros de neón sobre los que se descubren las pistas)
+import sala4Fondo from '../assets/sala4/sala4-fondo.png'
+
 export const PACIENTE = {
   nombre: 'Carlos Eduardo Ramírez Corrales',
   edad: 42,
@@ -120,12 +123,14 @@ export const SALAS = [
     id: 4,
     nombre: 'Sala del bicarbonato',
     narrativa:
-      'Una puerta oxidada tiene un candado numérico. En la sala hay tres elementos que esconden pistas: un frasco, una radiografía y un monitor.',
-    pregunta: 'Descubre las tres pistas y arma el código para abrir la puerta.',
-    pista: 'Toca el frasco, la radiografía y el monitor. Cada uno revela una palabra del enunciado y un número. El código son esos tres números, en orden.',
+      'Una puerta oxidada bloquea el paso. En la pared parpadean tres letreros de neón; cada uno esconde una palabra del enunciado y un dígito del código.',
+    pregunta: 'Toca los tres letreros para descubrir el código y abrir la puerta.',
+    pista: 'Cada letrero revela una palabra y un dígito. Tócalos en cualquier orden; en el teclado, el código va en el orden del enunciado.',
     tipo: 'candado',
     longitud: 3,
     codigo: '327',
+    imagenFondo: sala4Fondo,
+    imagenAspecto: '1408 / 768',
     // Enunciado con huecos: cada hueco se llena al descubrir su pista interactiva.
     enunciado: {
       partes: [
@@ -135,10 +140,29 @@ export const SALAS = [
         '.',
       ],
     },
+    // posicion en % del lienzo (centro x/y y tamaño ancho/alto del área tocable)
     pistasInteractivas: [
-      { id: 'frasco', icono: '🧪', nombre: 'Frasco etiquetado', palabra: 'bicarbonato', revela: 'Laboratorio 3', digito: '3' },
-      { id: 'radiografia', icono: '🩻', nombre: 'Radiografía', palabra: 'duodeno', revela: 'Duodeno 2', digito: '2' },
-      { id: 'monitor', icono: '🖥️', nombre: 'Monitor de pH', palabra: '7', revela: 'pH ideal: 7', digito: '7' },
+      {
+        id: 'laboratorio',
+        nombre: 'Cartel LABORATORIO',
+        palabra: 'bicarbonato',
+        digito: '3',
+        posicion: { x: 21.5, y: 42, ancho: 12, alto: 38 },
+      },
+      {
+        id: 'duodeno',
+        nombre: 'Cartel DUODENO',
+        palabra: 'duodeno',
+        digito: '2',
+        posicion: { x: 67, y: 42, ancho: 12, alto: 38 },
+      },
+      {
+        id: 'ph',
+        nombre: 'Cartel pH',
+        palabra: '7',
+        digito: '7',
+        posicion: { x: 82, y: 40, ancho: 12, alto: 34 },
+      },
     ],
   },
 
